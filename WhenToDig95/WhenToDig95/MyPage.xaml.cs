@@ -13,6 +13,7 @@ namespace WhenToDig95
         public MyPage()
         {
             InitializeComponent();
+            BindingContext = App.Locator.Main;
         }
     }
 }
