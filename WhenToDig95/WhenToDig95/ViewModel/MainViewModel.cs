@@ -1,62 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace WhenToDig95.ViewModel
 {
-    class MainViewModel : ViewModelBase
-{
-    /// <summary>
-    /// The <see cref="ClickCount" /> property's name.
-    /// </summary>
-    public const string ClickCountPropertyName = "ClickCount";
- 
-    private int _clickCount;
- 
-    /// <summary>
-    /// Sets and gets the ClickCount property.
-    /// Changes to that property's value raise the PropertyChanged event. 
-    /// </summary>
-    public int ClickCount
+    public class MainViewModel : ViewModelBase
     {
-        get
+        /// <summary>
+        /// The <see cref="ClickCount" /> property's name.
+        /// </summary>
+        public const string ClickCountPropertyName = "ClickCount";
+
+        private int _clickCount;
+
+        /// <summary>
+        /// Sets and gets the ClickCount property.
+        /// Changes to that property's value raise the PropertyChanged event. 
+        /// </summary>
+        public int ClickCount
         {
-            return _clickCount;
-        }
-        set
-        {
-            if (Set(() => ClickCount, ref _clickCount, value))
+            get
             {
-                RaisePropertyChanged(() => ClickCountFormatted);
+                return _clickCount;
+            }
+            set
+            {
+                if (Set(() => ClickCount, ref _clickCount, value))
+                {
+                    RaisePropertyChanged(() => ClickCountFormatted);
+                }
             }
         }
-    }
- 
-    public string ClickCountFormatted
-    {
-        get
+
+        public string ClickCountFormatted
         {
-            return string.Format("The button was clicked {0} time(s)", ClickCount);
+            get
+            {
+                return string.Format("The button was clicked {0} time(s)", ClickCount);
+            }
         }
-    }
- 
-    private RelayCommand _incrementCommand;
- 
-    /// <summary>
-    /// Gets the IncrementCommand.
-    /// </summary>
-    public RelayCommand IncrementCommand
-    {
-        get
+
+        private RelayCommand _incrementCommand;
+
+        /// <summary>
+        /// Gets the IncrementCommand.
+        /// </summary>
+        public RelayCommand IncrementCommand
         {
-            return _incrementCommand
-                ?? (_incrementCommand = new RelayCommand(
-                () =>
-                {
-                    ClickCount++;
-                }));
+            get
+            {
+                return _incrementCommand
+                    ?? (_incrementCommand = new RelayCommand(
+                    () =>
+                    {
+                        ClickCount++;
+                    }));
+            }
         }
     }
 }
