@@ -11,20 +11,20 @@ namespace WhenToDig95
     {
         public App()
         {
-            // The root page of your application
-            MainPage = new ContentPage
+            private static ViewModelLocator _locator;
+ 
+            public static ViewModelLocator Locator
             {
-                Content = new StackLayout
+                get
                 {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            XAlign = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
+                    return _locator ?? (_locator = new ViewModelLocator());
                 }
-            };
+            }
+ 
+            public static Page GetMainPage()
+            {
+                return new MyPage();
+            }
         }
 
         protected override void OnStart()
